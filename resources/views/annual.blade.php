@@ -121,13 +121,25 @@
                 <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">{{ $annual->h9 ?? 'Full Annual Report' }}</h2>
                 <p class="text-gray-600 mb-6 max-w-2xl mx-auto">{{ $annual->sh44 ?? 'Download our complete 2023 Annual Report for detailed financial statements, project outcomes, and future plans.' }}</p>
                 <div class="flex flex-col sm:flex-row mt-8 md:mt-10 justify-center gap-4">
-                    <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-medium transition-colors">
-                        Download PDF (English)
-                    </a>
-                    <a href="#" class="inline-block bg-white hover:bg-gray-100 text-gray-800 border border-gray-300 px-6 py-3 rounded-md font-medium transition-colors">
-                        Download PDF (Nepali)
-                    </a>
-    
+                @if($annualReport && $annualReport->pdf)
+                    <div id="download-report" class="text-center bg-gray-50 p-8 rounded-xl border border-gray-200">
+                        <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">
+                            {{ $annualReport->title }}
+                        </h2>
+                        <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+                            {{ $annualReport->subtitle }}
+                        </p>
+
+        <div class="flex flex-col sm:flex-row mt-8 md:mt-10 justify-center gap-4">
+            <a href="{{ asset('storage/' . $annualReport->pdf) }}" target="_blank"
+               class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md font-medium transition-colors">
+                Download PDF
+            </a>
+        </div>
+    </div>
+@endif
+
+
             </div>
         </div>
     </section>

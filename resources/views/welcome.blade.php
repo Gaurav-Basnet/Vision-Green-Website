@@ -122,7 +122,7 @@
                         <div class="bg-green-100 p-3 rounded-full mr-4">
                             <i class="{{ $home->icon2 }} text-xl md:text-2xl text-green-600"></i>
                         </div>
-                        <h3 class="text-lg md:text-xl font-bold text-green-800">{{ $home->icon2 }}</h3>
+                        <h3 class="text-lg md:text-xl font-bold text-green-800">{{ $home->t4}}</h3>
                     </div>
                     <p class="text-sm md:text-base text-gray-600">{{ $home->st4 }}</p>
                 </div>
@@ -144,7 +144,7 @@
                     class="gsap-card bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-green-600">
                     <div class="flex items-center mb-3 md:mb-4">
                         <div class="bg-green-100 p-3 rounded-full mr-4">
-                            <i class="{{ $home->icon4 }}text-xl md:text-2xl text-green-600"></i>
+                            <i class="{{ $home->icon4 }} text-xl md:text-2xl text-green-600"></i>
                         </div>
                         <h3 class="text-lg md:text-xl font-bold text-green-800">{{ $home->t6 }}</h3>
                     </div>

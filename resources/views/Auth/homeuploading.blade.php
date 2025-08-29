@@ -198,7 +198,7 @@
                                     <option value="fas fa-flask">Flask</option>
                                 </select>
                             </div>
-                            <input type="text" name="t4" value="{{ $home->t4 }}" class="text-lg md:text-xl font-bold text-green-800 w-full bg-transparent 
+                            <input type="text" name="t4" value="{{ $home->t4}}" class="text-lg md:text-xl font-bold text-green-800 w-full bg-transparent 
                                     border-2 border-dashed border-gray-300 hover:border-gray-400 
                                     focus:outline-none focus:border-green-600 rounded-lg px-4 py-2 
                                     transition-all duration-200" placeholder="Enter indigenous title">
@@ -568,6 +568,7 @@
                 </div>
             </div>
         </section>
+
         <!-- Featured Project Highlight with Background -->
         <section class="bg-cover bg-center py-16 md:py-24 relative gsap"
             style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');">

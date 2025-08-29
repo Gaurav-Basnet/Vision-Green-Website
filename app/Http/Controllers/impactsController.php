@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Impacts;
-
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class impactsController extends Controller
@@ -26,8 +26,17 @@ public function fetchhome(){
     {
         // Fetch first (or latest) record of home section
         $impacts =Impacts::first();
+            // Fetch Annual Reports first
+    $annualReports = Report::where('type', 'Annual Report')
+                            ->orderBy('created_at', 'desc')
+                            ->get();
 
-     return view('impact', compact('impacts'));
+    // Fetch other reports
+    $otherReports = Report::where('type', '!=', 'Annual Report')
+                          ->orderBy('created_at', 'desc')
+                          ->get();
+
+     return view('impact', compact('impacts' , 'annualReports', 'otherReports'));
 
     }
 
