@@ -43,12 +43,16 @@ Route::get('/terms', function () {
 Route::get('/sitemap', function () {
     return view('sitemap');
 });
-Route::get('/notice', function () {
-    return view('notice');
-});
-Route::get('/vacancy', function () {
-    return view('vacancy');
-});
+
+Route::get('/notice',[noticeController::class,'index'])->name('notice.fetch');
+Route::get('/notice/search', [noticeController::class, 'search'])->name('notice.search');
+
+
+Route::get('/notices/{id}',[noticeController::class,'enlarge'])->name('notice.details');
+
+
+
+
 Route::get('/newsletter', [newsController::class, 'index'])->name('newsletters.index');
 Route::get('/newsletters/{id}', [newsController::class, 'show'])->name('newsletters.show');
 Route::delete('/newsletters/{id}', [newsController::class, 'destroy'])->name('newsletters.destroy');
@@ -82,7 +86,9 @@ Route::get('impact', [impactsController::class, 'index'])->name('impacts');
 
 Route::get('contact', action: [contactController::class, 'index'])->name('contact');
 
-Route::get('vacancy', action: [vacancyController::class, 'index'])->name('vacancy');
+Route::get('/vacancy', action: [vacancyController::class, 'index'])->name('vacancy');
+Route::get('/vacancy/apply/{id}', [vacancyController::class, 'apply'])->name('vacancy.apply');
+
 
 Route::get('/sub-welcome', [TeamMemberController::class, 'index'])->name('home');
 
@@ -172,6 +178,12 @@ Route::delete('/newsletters/{id}', [newsController::class, 'destroy'])->name('ne
 Route::post('/noticeupload',[noticeController::class,'store'])->name('notice.store');
 
 Route::get('noticeuploading',[noticeController::class,'adminshow'])->name('notices.get');
+Route::delete('/notice/{id}', [noticeController::class, 'destroy'])->name('notice.destroy');
+
+Route::get('/jobsuploading',[vacancyController::class,'fetchjobs'])->name('jobs.get');
+Route::post('/job/upload',[vacancyController::class,'store'])->name('jobs.store');
+Route::delete('/job/{id}', [vacancyController::class, 'destroy'])->name('jobs.destroy');
+
 });
 
 

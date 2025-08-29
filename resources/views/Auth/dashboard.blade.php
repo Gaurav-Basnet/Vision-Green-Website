@@ -249,12 +249,11 @@
                                     <a href="/newsletteruploading"
                                         class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">NewsLetter
                                         Uploading</a>
-                                    <a href="/vacancyuploading"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Education
-                                        Resource</a>
-                                    <a href="/vacancyuploading"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Publication
-                                        Archive</a>
+                                    <a href="/jobsuploading"
+                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Jobs Uploading
+                                        </a>
+                                    <a href="/noticeuploading"
+                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Notice Uploading</a>
                                 </div>
                             </div>
                             <!-- Project Management -->
@@ -444,12 +443,10 @@
                                 <a href="/newsletteruploading"
                                     class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">NewsLetter
                                     Uploading</a>
-                                <a href="/vacancyuploading"
-                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Education
-                                    Resource</a>
-                                <a href="/vacancyuploading"
-                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Publication
-                                    Archive</a>
+                                <a href="/jobsuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Jobs Uploading</a>
+                                <a href="/noticeuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Notice Uploading</a>
                             </div>
                         </div>
 

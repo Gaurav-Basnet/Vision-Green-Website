@@ -11,6 +11,7 @@ class Notice extends Model
         'type',
         'location',
         'tags',
+        'event_date',
     
     ];
 }
