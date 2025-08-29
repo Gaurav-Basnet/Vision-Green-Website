@@ -1,5 +1,5 @@
 
-function disableButton() {
+function disablebtn() {
     let btn = document.getElementById('send');
     btn.disabled = true;
     btn.innerText = "Submitting..."; // optional

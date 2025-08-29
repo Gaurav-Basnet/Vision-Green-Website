@@ -201,7 +201,7 @@
             </div>
 
             <!-- Form -->
-            <form action="{{ route('subscribe.store') }}" method="POST" class="bg-white rounded-2xl shadow-xl p-8 md:p-10 space-y-6">
+            <form action="{{ route('subscribe.store') }}" method="POST" class="bg-white rounded-2xl shadow-xl p-8 md:p-10 space-y-6" onsubmit="disablebtn()">
                 @csrf
 
                 <!-- Email -->
@@ -255,7 +255,7 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit"
+                <button type="submit" id="send"
                     class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

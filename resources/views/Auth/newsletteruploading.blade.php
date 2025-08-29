@@ -3,10 +3,6 @@
 @section('content')
     <div class="container mx-auto px-4 py-6">
 
-        <!-- Success Message -->
-        @if(session('success'))
-            <div class="text-green-600 mb-4">{{ session('success') }}</div>
-        @endif
 
         <!-- Header Section -->
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">

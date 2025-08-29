@@ -104,10 +104,62 @@
         .preload * {
             transition: none !important;
         }
+        
+        /* Custom styles for notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+            max-width: 400px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-success {
+            background-color: #10B981;
+            border-left: 4px solid #059669;
+        }
+
+        .notification-error {
+            background-color: #EF4444;
+            border-left: 4px solid #DC2626;
+        }
+
+        .notification-icon {
+            font-size: 20px;
+        }
     </style>
 </head>
 
 <body class="bg-vision-green-50 font-sans preload">
+    <!-- Success Message -->
+    @if(session('success'))
+        <div id="successMessage" class="notification notification-success">
+            <span class="notification-icon">✓</span>
+            <span>{{ session('success') }}</span>
+        </div>
+    @endif
+
+    <!-- Error Message -->
+    @if(session('error'))
+        <div id="errorMessage" class="notification notification-error">
+            <span class="notification-icon">✕</span>
+            <span>{{ session('error') }}</span>
+        </div>
+    @endif
+
     <div class="flex h-screen overflow-hidden ">
         <!-- Desktop Sidebar -->
         <div class="hidden md:flex md:flex-shrink-0">
@@ -195,12 +247,14 @@
                                     Uploading</a>
                                 <div class="relative">
                                     <a href="/newsletteruploading"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">NewsLetter Uploading</a>
+                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">NewsLetter
+                                        Uploading</a>
                                     <a href="/vacancyuploading"
                                         class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Education
                                         Resource</a>
                                     <a href="/vacancyuploading"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Publication Archive</a>
+                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Publication
+                                        Archive</a>
                                 </div>
                             </div>
                             <!-- Project Management -->
@@ -297,153 +351,197 @@
         </div>
 
         <!-- Mobile sidebar -->
- <!-- Mobile sidebar -->
-<div class="md:hidden fixed inset-0 z-40 hidden" id="mobile-sidebar">
-    <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out"
-        id="sidebar-overlay"></div>
-    <div class="relative flex flex-col w-72 bg-vision-green-800 h-full transform transition-transform duration-300 ease-in-out -translate-x-full"
-        id="sidebar-content">
-        <div class="flex items-center h-16 px-4 bg-vision-green-900">
-            <img src="assests/logo.png" alt="Vision Green Logo" class="h-10 w-auto mx-4">
-        
-            <button type="button"
-                class="ml-auto p-2 rounded-md text-vision-green-200 hover:text-white hover:bg-vision-green-700 focus:outline-none transition-colors duration-200"
-                id="close-sidebar">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto sidebar-scroll">
-            <nav class="flex-1 space-y-1">
-                <a href="/layout"
-                    class="flex items-center px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200">
-                    <i class="fas fa-leaf mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                    Dashboard
-                </a>
+        <!-- Mobile sidebar -->
+        <div class="md:hidden fixed inset-0 z-40 hidden" id="mobile-sidebar">
+            <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out"
+                id="sidebar-overlay"></div>
+            <div class="relative flex flex-col w-72 bg-vision-green-800 h-full transform transition-transform duration-300 ease-in-out -translate-x-full"
+                id="sidebar-content">
+                <div class="flex items-center h-16 px-4 bg-vision-green-900">
+                    <img src="assests/logo.png" alt="Vision Green Logo" class="h-10 w-auto mx-4">
 
-                <!-- Page Uploading -->
-                <div class="relative">
-                    <button
-                        class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
-                        <div class="flex items-center">
-                            <i class="fa fa-upload mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                            <span>Page Uploading</span>
-                        </div>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
+                    <button type="button"
+                        class="ml-auto p-2 rounded-md text-vision-green-200 hover:text-white hover:bg-vision-green-700 focus:outline-none transition-colors duration-200"
+                        id="close-sidebar">
+                        <i class="fas fa-times"></i>
                     </button>
-                    <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                        <a href="/homeuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md">Home</a>
-                        <a href="/aboutuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md">About</a>
+                </div>
+                <div class="flex flex-col flex-grow px-4 py-4 overflow-y-auto sidebar-scroll">
+                    <nav class="flex-1 space-y-1">
+                        <a href="/layout"
+                            class="flex items-center px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200">
+                            <i class="fas fa-leaf mr-3 transition-transform duration-200 group-hover:scale-110"></i>
+                            Dashboard
+                        </a>
+
+                        <!-- Page Uploading -->
                         <div class="relative">
                             <button
-                                class="w-full flex items-center justify-between px-3 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
+                                class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
                                 <div class="flex items-center">
-                                    <a href="/publicationuploading" class="text-sm">Publication</a>
+                                    <i
+                                        class="fa fa-upload mr-3 transition-transform duration-200 group-hover:scale-110"></i>
+                                    <span>Page Uploading</span>
                                 </div>
-                                <i class="fas fa-chevron-down text-sm transition-transform duration-200 transform"></i>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
                             </button>
                             <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                                <a href="/newsuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Newsletter</a>
-                                <a href="/privacyuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Privacy & Policies</a>
-                                <a href="/termsuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Teams & Condition</a>
-                                <a href="/impactsuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Impact Report</a>
-                                <a href="/annualuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Annual Report</a>
+                                <a href="/homeuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md">Home</a>
+                                <a href="/aboutuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md">About</a>
+                                <div class="relative">
+                                    <button
+                                        class="w-full flex items-center justify-between px-3 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
+                                        <div class="flex items-center">
+                                            <a href="/publicationuploading" class="text-sm">Publication</a>
+                                        </div>
+                                        <i
+                                            class="fas fa-chevron-down text-sm transition-transform duration-200 transform"></i>
+                                    </button>
+                                    <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
+                                        <a href="/newsuploading"
+                                            class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Newsletter</a>
+                                        <a href="/privacyuploading"
+                                            class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Privacy
+                                            & Policies</a>
+                                        <a href="/termsuploading"
+                                            class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Teams
+                                            & Condition</a>
+                                        <a href="/impactsuploading"
+                                            class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Impact
+                                            Report</a>
+                                        <a href="/annualuploading"
+                                            class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Annual
+                                            Report</a>
+                                    </div>
+                                </div>
+                                <a href="/contactuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Contact</a>
+                                <a href="/vacancyuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Vacancy</a>
                             </div>
                         </div>
-                        <a href="/contactuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Contact</a>
-                        <a href="/vacancyuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Vacancy</a>
-                    </div>
-                </div>
 
-                <!-- Uploading -->
-                <div class="relative">
-                    <button
-                        class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
-                        <div class="flex items-center">
-                            <i class="fa fa-upload mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                            <span>Uploading</span>
+                        <!-- Uploading -->
+                        <div class="relative">
+                            <button
+                                class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
+                                <div class="flex items-center">
+                                    <i
+                                        class="fa fa-upload mr-3 transition-transform duration-200 group-hover:scale-110"></i>
+                                    <span>Uploading</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
+                            </button>
+                            <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
+                                <a href="/team"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Team
+                                    Uploading</a>
+                                <a href="/partneruploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Partner
+                                    Uploading</a>
+                                <a href="/newsletteruploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">NewsLetter
+                                    Uploading</a>
+                                <a href="/vacancyuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Education
+                                    Resource</a>
+                                <a href="/vacancyuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Publication
+                                    Archive</a>
+                            </div>
                         </div>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
-                    </button>
-                    <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                        <a href="/team" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Team Uploading</a>
-                        <a href="/partneruploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Partner Uploading</a>
-                        <a href="/newsletteruploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">NewsLetter Uploading</a>
-                        <a href="/vacancyuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Education Resource</a>
-                        <a href="/vacancyuploading" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Publication Archive</a>
-                    </div>
-                </div>
 
-                <!-- Projects -->
-                <div class="relative">
-                    <button
-                        class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
-                        <div class="flex items-center">
-                            <i class="fas fa-seedling mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                            <span>Projects</span>
+                        <!-- Projects -->
+                        <div class="relative">
+                            <button
+                                class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-seedling mr-3 transition-transform duration-200 group-hover:scale-110"></i>
+                                    <span>Projects</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
+                            </button>
+                            <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Active
+                                    Projects</a>
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Completed
+                                    Projects</a>
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Upcoming
+                                    Initiatives</a>
+                            </div>
                         </div>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
-                    </button>
-                    <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Active Projects</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Completed Projects</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Upcoming Initiatives</a>
-                    </div>
-                </div>
 
-                <!-- Sustainability Metrics -->
-                <a href="#"
-                    class="flex items-center px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200">
-                    <i class="fas fa-chart-line mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                    Sustainability Metrics
-                </a>
+                        <!-- Sustainability Metrics -->
+                        <a href="#"
+                            class="flex items-center px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200">
+                            <i
+                                class="fas fa-chart-line mr-3 transition-transform duration-200 group-hover:scale-110"></i>
+                            Sustainability Metrics
+                        </a>
 
-                <!-- Community -->
-                <div class="relative">
-                    <button
-                        class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
-                        <div class="flex items-center">
-                            <i class="fas fa-users mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                            <span>Community</span>
+                        <!-- Community -->
+                        <div class="relative">
+                            <button
+                                class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-users mr-3 transition-transform duration-200 group-hover:scale-110"></i>
+                                    <span>Community</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
+                            </button>
+                            <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Volunteers</a>
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Partners</a>
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Events</a>
+                            </div>
                         </div>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
-                    </button>
-                    <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Volunteers</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Partners</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Events</a>
-                    </div>
-                </div>
 
-                <!-- Settings -->
-                <div class="relative">
-                    <button
-                        class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
-                        <div class="flex items-center">
-                            <i class="fas fa-cog mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                            <span>Settings</span>
+                        <!-- Settings -->
+                        <div class="relative">
+                            <button
+                                class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
+                                <div class="flex items-center">
+                                    <i
+                                        class="fas fa-cog mr-3 transition-transform duration-200 group-hover:scale-110"></i>
+                                    <span>Settings</span>
+                                </div>
+                                <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
+                            </button>
+                            <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">User
+                                    Settings</a>
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">System
+                                    Settings</a>
+                                <a href="#"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Permissions</a>
+                            </div>
                         </div>
-                        <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
-                    </button>
-                    <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">User Settings</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">System Settings</a>
-                        <a href="#" class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Permissions</a>
-                    </div>
+                    </nav>
                 </div>
-            </nav>
-        </div>
-        <div class="p-4 border-t border-vision-green-700">
-            <div class="flex items-center">
-                <img class="w-10 h-10 rounded-full transition-transform duration-200 hover:scale-105"
-                    src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" alt="User avatar">
-                <div class="ml-3">
-                    <p class="text-sm font-medium text-white">Eco Manager</p>
-                    <p class="text-xs font-medium text-vision-green-300">Admin</p>
+                <div class="p-4 border-t border-vision-green-700">
+                    <div class="flex items-center">
+                        <img class="w-10 h-10 rounded-full transition-transform duration-200 hover:scale-105"
+                            src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" alt="User avatar">
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-white">Eco Manager</p>
+                            <p class="text-xs font-medium text-vision-green-300">Admin</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
         <div class="flex flex-col flex-1 overflow-hidden">
@@ -611,7 +709,7 @@
                     </div>
                 </div>
             </header>
-        <!-- Main content area -->
+            <!-- Main content area -->
             <main class="flex-1 overflow-y-auto md:p-0 py-2 px-0">
                 @yield('content')
             </main>
@@ -619,6 +717,7 @@
         </div>
 
         <script>
+
             // Wait for DOM to be fully loaded
             document.addEventListener('DOMContentLoaded', function () {
                 // Remove preload class to enable transitions
@@ -628,7 +727,53 @@
                 initMobileSidebar();
                 initDropdowns();
                 initSidebarDropdowns();
+
+                const successMsg = document.getElementById('successMessage');
+                if (successMsg) {
+                    // Show message
+                    setTimeout(() => {
+                        successMsg.classList.add('show');
+                    }, 100);
+
+                    // Hide message after 4 seconds
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+
+                        // Remove from DOM after animation completes
+                        setTimeout(() => {
+                            successMsg.remove();
+                        }, 500);
+                    }, 4000);
+                }
+
+                // Handle error message
+                const errorMsg = document.getElementById('errorMessage');
+                if (errorMsg) {
+                    // Show message
+                    setTimeout(() => {
+                        errorMsg.classList.add('show');
+                    }, 100);
+
+                    // Hide message after 4 seconds
+                    setTimeout(() => {
+                        errorMsg.classList.remove('show');
+
+                        // Remove from DOM after animation completes
+                        setTimeout(() => {
+                            errorMsg.remove();
+                        }, 500);
+                    }, 4000);
+                }
+
             });
+
+
+            
+            function disablebtn() {
+                let btn = document.getElementById('send');
+                btn.disabled = true;
+                btn.innerText = "Submitting..."; // optional
+            }
 
             // Mobile sidebar functionality
             function initMobileSidebar() {

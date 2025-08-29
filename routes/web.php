@@ -6,6 +6,7 @@ use App\Http\Controllers\contactController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\aboutController;
 use App\Http\Controllers\impactsController;
+use App\Http\Controllers\noticeController;
 use App\Http\Controllers\privacyController;
 use App\Http\Controllers\publicationController;
 use App\Http\Controllers\newsController;
@@ -167,6 +168,10 @@ Route::get('/newsletteruploading',[newsController::class,'createview'])->name('n
 Route::post('/newspdf',[newsController::class,'store'])->name('newsletters.store');
 Route::delete('/newsletters/{id}', [newsController::class, 'destroy'])->name('newsletters.destroy');
 
+
+Route::post('/noticeupload',[noticeController::class,'store'])->name('notice.store');
+
+Route::get('noticeuploading',[noticeController::class,'adminshow'])->name('notices.get');
 });
 
 
