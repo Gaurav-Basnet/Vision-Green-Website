@@ -169,11 +169,12 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
-                <a href="tel:+9779800000000" class="hover:text-blue-300 transition-colors text-xs">+977-98XXXXXXXX</a>
+                <a href="tel:+{{ $companyDetails->phone_number }}"
+                    class="hover:text-blue-300 transition-colors text-xs">+977-{{ $companyDetails->phone_number }}</a>
             </div>
 
             <!-- Center - Search (mobile only with expand animation) -->
-            <!-- <div class="flex items-center md:hidden mx-auto relative">
+            <div class="flex items-center md:hidden mx-auto relative">
                 <div class="relative transition-all duration-300 ease-in-out" id="search-container">
                     <svg xmlns="http://www.w3.org/2000/svg"
                         class="h-4 w-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none"
@@ -185,7 +186,7 @@
                         class="bg-gray-900 text-white pl-10 pr-4 py-1.5 rounded-full text-xs w-32 focus:w-48 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
                         id="mobile-search">
                 </div>
-            </div> -->
+            </div>
 
             <!-- Mobile Language Toggle -->
             <div class=" md:hidden relative group" id="language-toggle-container">
@@ -228,7 +229,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                         </svg>
-                        <a href="tel:+9779800000000" class="hover:text-blue-300 transition-colors">+977-98XXXXXXXX</a>
+                        <a href="tel:+{{ $companyDetails->phone_number }}"
+                            class="hover:text-blue-300 transition-colors text-xs">+977-{{ $companyDetails->phone_number }}</a>
                     </div>
                     <div class="flex items-center gap-2 group">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -237,8 +239,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        <a href="mailto:info@visiongreen.org.np"
-                            class="hover:text-blue-300 transition-colors">info@visiongreen.org.np</a>
+                        <a href="mailto:{{ $companyDetails->email }}"
+                            class="hover:text-blue-300 transition-colors">{{ $companyDetails->email }}
+                            {{ $companyDetails->email2 }}</a>
                     </div>
                 </div>
 
@@ -300,7 +303,7 @@
         <div class="max-w-full px-4 sm:px-4 lg:px-4">
             <div class="flex justify-between items-center h-16">
                 <!-- Logo -->
-                <img src="assests/logo.png" class="w-auto h-10" alt="Logo">
+                <a href="/"><img src="assests/logo.png" class="w-auto h-10" alt="Logo"></a>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-4">
@@ -338,7 +341,8 @@
                             <a href="/annual"
                                 class="block px-4 py-2 text-gray-700 hover:bg-[#c8e6c9] hover:text-[#1b5e20]">Annual
                                 Report</a>
-
+                            <a href="/project"
+                                class="block px-4 py-2 text-gray-700 hover:bg-[#c8e6c9] hover:text-[#1b5e20]">Projects</a>
                         </div>
                     </div>
 
@@ -515,22 +519,55 @@
                     <ul class="space-y-4">
                         <li class="flex items-start">
                             <i class="fas fa-map-marker-alt mt-0.5 mr-3 text-[#4ade80] text-sm"></i>
-                            <span class="text-gray-400 text-sm">Kathmandu, Nepal</span>
+                            <span class="text-gray-400 text-sm">{{ $companyDetails->address }}</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-phone mt-0.5 mr-3 text-[#4ade80] text-sm"></i>
                             <span class="text-gray-400 text-sm">
-                                <a href="tel:+9771234567890"
-                                    class="hover:text-[#4ade80] transition-colors">+977-1234567890</a>
+                                <a href="tel:+{{ $companyDetails->phone_number }}"
+                                    class="hover:text-[#4ade80] transition-colors">{{ $companyDetails->phone_number }}</a>
                             </span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-envelope mt-0.5 mr-3 text-[#4ade80] text-sm"></i>
                             <span class="text-gray-400 text-sm">
-                                <a href="mailto:info@visiongreen.org.np"
-                                    class="hover:text-[#4ade80] transition-colors">info@visiongreen.org.np</a>
+                                <a href="mailto:{{ $companyDetails->email ?? '#' }}"
+                                    class="hover:text-[#4ade80] transition-colors">
+                                    {{ $companyDetails->email ?? 'Not Available' }}
+                                </a>
                             </span>
                         </li>
+
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-0.5 mr-3 text-[#4ade80] text-sm"></i>
+                            <span class="text-gray-400 text-sm">
+                                <a href="mailto:{{ $companyDetails->email2 ?? '#' }}"
+                                    class="hover:text-[#4ade80] transition-colors">
+                                    {{ $companyDetails->email2 ?? 'Not Available' }}
+                                </a>
+                            </span>
+                        </li>
+
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-0.5 mr-3 text-[#4ade80] text-sm"></i>
+                            <span class="text-gray-400 text-sm">
+                                <a href="mailto:{{ $companyDetails->email3 ?? '#' }}"
+                                    class="hover:text-[#4ade80] transition-colors">
+                                    {{ $companyDetails->email3 ?? 'Not Available' }}
+                                </a>
+                            </span>
+                        </li>
+
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-0.5 mr-3 text-[#4ade80] text-sm"></i>
+                            <span class="text-gray-400 text-sm">
+                                <a href="mailto:{{ $companyDetails->email4 ?? '#' }}"
+                                    class="hover:text-[#4ade80] transition-colors">
+                                    {{ $companyDetails->email4 ?? 'Not Available' }}
+                                </a>
+                            </span>
+                        </li>
+
                     </ul>
                 </div>
             </div>

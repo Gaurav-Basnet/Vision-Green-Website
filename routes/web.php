@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\annualController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CdetailsController;
 use App\Http\Controllers\contactController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\aboutController;
@@ -44,12 +45,16 @@ Route::get('/terms', function () {
 Route::get('/sitemap', function () {
     return view('sitemap');
 });
-Route::get('/notice', function () {
-    return view('notice');
-});
-Route::get('/vacancy', function () {
-    return view('vacancy');
-});
+
+Route::get('/notice', [noticeController::class, 'index'])->name('notice.fetch');
+Route::get('/notice/search', [noticeController::class, 'search'])->name('notice.search');
+
+
+Route::get('/notices/{id}', [noticeController::class, 'enlarge'])->name('notice.details');
+
+
+
+
 Route::get('/newsletter', [newsController::class, 'index'])->name('newsletters.index');
 Route::get('/newsletters/{id}', [newsController::class, 'show'])->name('newsletters.show');
 Route::delete('/newsletters/{id}', [newsController::class, 'destroy'])->name('newsletters.destroy');
@@ -86,7 +91,9 @@ Route::get('annual', [annualController::class, 'index'])->name('annual');
 
 Route::get('contact', action: [contactController::class, 'index'])->name('contact');
 
-Route::get('vacancy', action: [vacancyController::class, 'index'])->name('vacancy');
+Route::get('/vacancy', action: [vacancyController::class, 'index'])->name('vacancy');
+Route::get('/vacancy/apply/{id}', [vacancyController::class, 'apply'])->name('vacancy.apply');
+
 
 Route::get('/sub-welcome', [TeamMemberController::class, 'index'])->name('home');
 
@@ -165,7 +172,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/projectposting', [ProjectController::class, 'store'])->name('projects.store');
     // Delete project
     Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
-
+    Route::get('/project/{id}', [ProjectController::class, 'opennew'])->name('project.open');
     Route::get('/newsletteruploading', [newsController::class, 'createview'])->name('news.send');
 
     Route::post('/newspdf', [newsController::class, 'store'])->name('newsletters.store');
@@ -179,9 +186,28 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reports', [reportController::class, 'store'])->name('reports.store');
     Route::delete('/reports/{report}', [reportController::class, 'destroy'])->name('reports.destroy');
 
-    Route::get('/resourceuploading', [EducationalResourceController::class, 'index'])->name('resources.index');
-    Route::post('/resources', [EducationalResourceController::class, 'store'])->name('resources.store');
-    Route::delete('/resources/{resource}', [EducationalResourceController::class, 'destroy'])->name('resources.destroy');
+    Route::get('/newsletteruploading', [newsController::class, 'createview'])->name('news.send');
+
+    Route::post('/newspdf', [newsController::class, 'store'])->name('newsletters.store');
+    Route::delete('/newsletters/{id}', [newsController::class, 'destroy'])->name('newsletters.destroy');
+
+
+    Route::post('/noticeupload', [noticeController::class, 'store'])->name('notice.store');
+
+    Route::get('noticeuploading', [noticeController::class, 'adminshow'])->name('notices.get');
+    Route::delete('/notice/{id}', [noticeController::class, 'destroy'])->name('notice.destroy');
+
+    Route::get('/jobsuploading', [vacancyController::class, 'fetchjobs'])->name('jobs.get');
+    Route::post('/job/upload', [vacancyController::class, 'store'])->name('jobs.store');
+    Route::delete('/jobs/{id}', [vacancyController::class, 'destroy'])->name('jobs.destroy');
+
+    // Company update route
+    Route::put('/companies/update', [CdetailsController::class, 'update'])->name('companies.update');
+
+    // Optional: route to fetch company data for the edit modal
+    Route::get('/companies/{id}/edit', [CdetailsController::class, 'edit']);
+
+    Route::get('/company', [CdetailsController::class, 'fetch'])->name('details.get');
 });
 
 

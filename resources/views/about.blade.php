@@ -172,6 +172,8 @@
         </div>
     </section>
 
+
+
     <!-- Milestones Timeline -->
     <section id="milestones" class="gsap py-12 md:py-16 bg-gray-50">
         <div class="container mx-auto px-4">
@@ -247,6 +249,7 @@
         </div>
     </section>
 
+
     <!-- Team Section -->
     <section id="team" class="gsap py-12 md:py-16 bg-white">
         <div class="container mx-auto px-4">
@@ -284,6 +287,61 @@
             @endif
         </div>
     </section>
+    <!-- Company Details Section -->
+    <section id="company-details" class="py-12 md:py-16 bg-gray-100 gsap">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-green-800">Company Details</h2>
+                <p class="text-gray-600 mt-2">All the important information about our organization</p>
+            </div>
+
+            <ul class="space-y-4 text-gray-700">
+          
+                <li class="flex items-start">
+                    <i class="fas fa-envelope mt-1 mr-3 text-green-600"></i>
+                    <span>Email 1: <a href="mailto:{{ $companyDetails->email ?? '#' }}"
+                            class="hover:text-green-600 transition-colors">{{ $companyDetails->email ?? 'Not Available' }}</a></span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-envelope mt-1 mr-3 text-green-600"></i>
+                    <span>Email 2: <a href="mailto:{{ $companyDetails->email2 ?? '#' }}"
+                            class="hover:text-green-600 transition-colors">{{ $companyDetails->email2 ?? 'Not Available' }}</a></span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-envelope mt-1 mr-3 text-green-600"></i>
+                    <span>Email 3: <a href="mailto:{{ $companyDetails->email3 ?? '#' }}"
+                            class="hover:text-green-600 transition-colors">{{ $companyDetails->email3 ?? 'Not Available' }}</a></span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-envelope mt-1 mr-3 text-green-600"></i>
+                    <span>Email 4: <a href="mailto:{{ $companyDetails->email4 ?? '#' }}"
+                            class="hover:text-green-600 transition-colors">{{ $companyDetails->email4 ?? 'Not Available' }}</a></span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-phone mt-1 mr-3 text-green-600"></i>
+                    <span>Phone: {{ $companyDetails->phone_number ?? 'Not Available' }}</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-map-marker-alt mt-1 mr-3 text-green-600"></i>
+                    <span>Address: {{ $companyDetails->address ?? 'Not Available' }}</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-id-card mt-1 mr-3 text-green-600"></i>
+                    <span>PAN Number: {{ $companyDetails->pan_number ?? 'Not Available' }}</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-users mt-1 mr-3 text-green-600"></i>
+                    <span>SWC Number: {{ $companyDetails->swc_number ?? 'Not Available' }}</span>
+                </li>
+                <li class="flex items-start">
+                    <i class="fas fa-file-alt mt-1 mr-3 text-green-600"></i>
+                    <span>Registration Number: {{ $companyDetails->reg_number ?? 'Not Available' }}</span>
+                </li>
+        
+            </ul>
+        </div>
+    </section>
+
 
     <!-- Optimized Impact Stats for Mobile & Desktop -->
     <section id="impact-stats" class="gsap py-12 bg-gradient-to-b from-green-700 to-green-600 text-white">

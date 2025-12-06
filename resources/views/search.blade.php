@@ -149,6 +149,7 @@
                     "partners": "partners",
                     "join": "cta-section",
                     "story": "hero-section"
+                    "companydetails":"company-details"
                 },
 
                 '/contact': {

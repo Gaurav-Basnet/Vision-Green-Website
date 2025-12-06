@@ -3,7 +3,6 @@
 @section('content')
 <div class="container mx-auto px-4 py-6">
 
-
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
         <div>
@@ -25,6 +24,7 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Title</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Description</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Type</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Event Date</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Location</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tags</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
@@ -35,9 +35,37 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $notice->title }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ Str::limit($notice->description, 50) }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $notice->type ?? '-' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if($notice->type)
+                                    <span class="px-2 py-1 text-xs font-semibold rounded-full 
+                                        {{ $notice->type == 'UpcomingEvents' ? 'bg-blue-100 text-blue-800' : '' }}
+                                        {{ $notice->type == 'Alerts' ? 'bg-red-100 text-red-800' : '' }}
+                                        {{ $notice->type == 'Achievements' ? 'bg-green-100 text-green-800' : '' }}">
+                                        {{ $notice->type }}
+                                    </span>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if($notice->event_date)
+                                    {{ \Carbon\Carbon::parse($notice->event_date)->format('M d, Y') }}
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $notice->location ?? '-' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $notice->tags ?? '-' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if($notice->tags)
+                                    @foreach(explode(',', $notice->tags) as $tag)
+                                        <span class="inline-block bg-gray-100 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-1 mb-1">
+                                            #{{ trim($tag) }}
+                                        </span>
+                                    @endforeach
+                                @else
+                                    -
+                                @endif
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <button type="button" class="text-red-600 hover:text-red-900"
                                     onclick="openDeleteModal({{ $notice->id }})">
@@ -122,7 +150,7 @@
                 <button id="closeNoticeModal" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
             </div>
 
-            <form action="{{ route('notice.store') }}" method="POST" class="mt-4 space-y-4" onsubmit="disablebtn()">
+            <form id="uploadNoticeForm" action="{{ route('notice.store') }}" method="POST" class="mt-4 space-y-4">
                 @csrf
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Title</label>
@@ -136,20 +164,35 @@
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Type</label>
-                    <input type="text" name="type" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2">
+                    <select name="type" id="noticeType" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2">
+                        <option value="">Select a type</option>
+                        <option value="UpcomingEvents">Upcoming Events</option>
+                        <option value="Alerts">Alerts</option>
+                        <option value="Achievements">Achievements</option>
+                    </select>
                 </div>
+                
+                <!-- Event Date Field -->
+                <div id="eventDateField" class="hidden">
+                    <label class="block text-sm font-medium text-gray-700">Event Date</label>
+                    <input type="date" name="event_date" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2">
+                </div>
+                
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Location</label>
                     <input type="text" name="location" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2">
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-gray-700">Tags</label>
-                    <input type="text" name="tags" class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2">
+                    <label class="block text-sm font-medium text-gray-700">Tags <span class="text-xs text-gray-500">(comma separated)</span></label>
+                    <input type="text" name="tags" placeholder="e.g. important, meeting, announcement" 
+                        class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2">
+                    <p class="text-xs text-gray-500 mt-1">Enter tags separated by commas. Example: important, meeting, announcement</p>
                 </div>
 
-                <div class="flex justify-end pt-4 border-t mt-6">
+                <div class="flex justify-end pt-4 border-t mt-6 space-x-3">
                     <button type="button" id="cancelNoticeBtn" class="bg-white py-2 px-4 border border-gray-300 rounded-md">Cancel</button>
-                    <button type="submit" class="ml-3 bg-green-600 text-white py-2 px-4 rounded-md">Save Notice</button>
+                    <button type="submit" id="saveNoticeBtn" class="bg-green-600 text-white py-2 px-4 rounded-md">Save Notice</button>
                 </div>
             </form>
         </div>
@@ -182,20 +225,34 @@ document.addEventListener('DOMContentLoaded', function () {
     const addBtn = document.getElementById('addNoticeBtn');
     const closeBtn = document.getElementById('closeNoticeModal');
     const cancelBtn = document.getElementById('cancelNoticeBtn');
+    const noticeType = document.getElementById('noticeType');
+    const eventDateField = document.getElementById('eventDateField');
+    const uploadForm = document.getElementById('uploadNoticeForm');
+    const saveBtn = document.getElementById('saveNoticeBtn');
 
+    // Open/Close modal
     addBtn.addEventListener('click', () => modal.classList.remove('hidden'));
     closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
     cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));
+    window.addEventListener('click', (e) => { if(e.target === modal) modal.classList.add('hidden'); });
 
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.classList.add('hidden');
+    // Show/hide event date field
+    noticeType.addEventListener('change', function() {
+        eventDateField.classList.toggle('hidden', this.value !== 'UpcomingEvents');
+    });
+
+    // Disable Save button on form submit
+    uploadForm.addEventListener('submit', function() {
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
     });
 });
 
+// Delete modal functions
 function openDeleteModal(id) {
     const modal = document.getElementById('deleteModal');
     const form = document.getElementById('deleteForm');
-    form.action = `/notice/${id}`; // dynamically set action route
+    form.action = `/notice/${id}`;
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 }

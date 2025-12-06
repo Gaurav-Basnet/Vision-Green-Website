@@ -13,25 +13,44 @@
         </div>
     </section>
     <!-- Projects Filter -->
-    <section class="gsap py-4 md:py-8 bg-gray-50">
+    <section class="py-6 md:py-10 bg-gray-50">
         <div class="container mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-3 md:mb-0">Filter Projects</h2>
-                <div class="flex flex-wrap gap-2 justify-center md:justify-start">
-                    @php
-                        $categories = ['all', 'Reforestation', 'Education', 'Research', 'Community'];
-                    @endphp
-                    @foreach($categories as $cat)
-                        <a href="{{ route('projects.send', ['category' => strtolower($cat)]) }}"
-                            class="px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-medium 
-                                              {{ request('category', 'all') == strtolower($cat) ? 'bg-green-600 text-white' : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-100' }}">
-                            {{ ucfirst($cat) }}
-                        </a>
-                    @endforeach
-                </div>
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-gray-800">
+                    Browse Projects
+                </h2>
+
+                <form method="GET" action="{{ route('projects.send') }}" class="flex items-center gap-3 w-full md:w-auto">
+                    <div class="relative w-full">
+                        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search projects..."
+                            class="pl-4 pr-12 py-3 w-full rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all duration-300">
+                        <button type="submit"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-600 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="flex flex-wrap gap-2 justify-start items-center">
+                @php
+                    $categories = ['all', 'Reforestation', 'Education', 'Research', 'Community'];
+                @endphp
+                @foreach($categories as $cat)
+                    <a href="{{ route('projects.send', array_merge(request()->all(), ['category' => strtolower($cat)])) }}"
+                        class="px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ease-in-out
+                                                        {{ request('category', 'all') == strtolower($cat) ? 'bg-green-600 text-white shadow-md' : 'bg-white text-gray-700 border border-gray-300 hover:bg-green-50 hover:border-green-300' }}">
+                        {{ ucfirst($cat) }}
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>
+
 
     <!-- Projects Grid -->
     <section id="projects" class="gsap py-8 md:py-16 bg-white">
@@ -63,11 +82,10 @@
                             </p>
                             <div class="flex justify-between items-center text-xs md:text-sm text-gray-500">
                                 <span>{{ $project->location }}</span>
-                              <a href="javascript:void(0)" 
-   onclick="openModal('{{$project->name}}','{{ $project->description}}')"
-   class="text-green-600 hover:text-green-800 font-medium">
-   Learn More →
-</a>
+                                <a href="project/{{ $project->id }}"
+                                    class="text-green-600 hover:text-green-800 font-medium">
+                                    Learn More →
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -182,31 +200,30 @@
         </div>
     </section>
     <!-- Modal (hidden by default) -->
-<div id="projectModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-  <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
-    <!-- Close Button -->
-    <button onclick="closeModal()" 
-            class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
-      ✕
-    </button>
+    <div id="projectModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
+                ✕
+            </button>
 
-    <!-- Modal Content -->
-    <h2 id="modalTitle" class="text-xl font-bold text-gray-800 mb-2">Project Title</h2>
-    <p id="modalDescription" class="text-gray-600">Project description goes here...</p>
-  </div>
-</div>
+            <!-- Modal Content -->
+            <h2 id="modalTitle" class="text-xl font-bold text-gray-800 mb-2">Project Title</h2>
+            <p id="modalDescription" class="text-gray-600">Project description goes here...</p>
+        </div>
+    </div>
 
-<script>
-function openModal(title, description) {
-    document.getElementById("modalTitle").innerText = title;
-    document.getElementById("modalDescription").innerText = description;
-    document.getElementById("projectModal").classList.remove("hidden");
-}
+    <script>
+        function openModal(title, description) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalDescription").innerText = description;
+            document.getElementById("projectModal").classList.remove("hidden");
+        }
 
-function closeModal() {
-    document.getElementById("projectModal").classList.add("hidden");
-}
-</script>
+        function closeModal() {
+            document.getElementById("projectModal").classList.add("hidden");
+        }
+    </script>
 
 
 

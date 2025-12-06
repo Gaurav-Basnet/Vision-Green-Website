@@ -165,7 +165,7 @@
                     </button>
                 </div>
 
-                <form action="{{ route('newsletters.store') }}" method="POST" enctype="multipart/form-data"
+<form id="uploadNewsletterForm" action="{{ route('newsletters.store') }}" method="POST" enctype="multipart/form-data"
                     class="mt-4 space-y-4">
                     @csrf
 
@@ -201,7 +201,7 @@
                     <div class="flex justify-end pt-4 border-t mt-6">
                         <button type="button" id="cancelBtn"
                             class="bg-white py-2 px-4 border border-gray-300 rounded-md">Cancel</button>
-                        <button type="submit" class="ml-3 bg-green-600 text-white py-2 px-4 rounded-md">Save
+                        <button type="submit" id="saveNewsletterBtn"  class="ml-3 bg-green-600 text-white py-2 px-4 rounded-md">Save
                             Newsletter</button>
                     </div>
                 </form>
@@ -233,6 +233,14 @@
 
 
     <script>
+         // Disable Save button while submitting newsletter
+    const uploadNewsletterForm = document.getElementById('uploadNewsletterForm');
+    const saveNewsletterBtn = document.getElementById('saveNewsletterBtn');
+
+    uploadNewsletterForm.addEventListener('submit', () => {
+        saveNewsletterBtn.disabled = true;
+        saveNewsletterBtn.textContent = 'Saving...';
+    });
         document.addEventListener('DOMContentLoaded', function () {
             const modal = document.getElementById('newsletterModal');
             const addBtn = document.getElementById('addNewsletterBtn');

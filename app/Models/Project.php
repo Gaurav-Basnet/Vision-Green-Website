@@ -16,6 +16,8 @@ class Project extends Model
         'status',
         'location',
         'image',
+        'start_date',
+        'end_date',
     ];
 }
 

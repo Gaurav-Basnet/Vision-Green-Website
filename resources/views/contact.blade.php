@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="ml-2 md:ml-3">
                                     <p class="text-sm md:text-base font-medium">Phone</p>
-                                    <p class="text-sm md:text-base">+977 1-1234567</p>
+                                    <p class="text-sm md:text-base">+977 {{ $companyDetails->phone_number }}</p>
                                 </div>
                             </div>
 
@@ -132,8 +132,8 @@
                                 </div>
                                 <div class="ml-2 md:ml-3">
                                     <p class="text-sm md:text-base font-medium">Email</p>
-                                    <p class="text-sm md:text-base">info@sustainablenepal.org</p>
-                                </div>
+                                    <p class="text-sm md:text-base">{{$companyDetails->email}}</p>
+                                    </div>
                             </div>
 
                             <div class="flex items-start">
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="ml-2 md:ml-3">
                                     <p class="text-sm md:text-base font-medium">Address</p>
-                                    <p class="text-sm md:text-base">Lazimpat, Kathmandu 44600</p>
+                                    <p class="text-sm md:text-base">{{$companyDetails->address}}</p>
                                     <p class="text-sm md:text-base">Nepal</p>
                                 </div>
                             </div>
@@ -253,66 +253,7 @@
         </div>
     </section>
 
-    <!-- Team Contact -->
-    <sectio id="team-info" class="gsap py-8 md:py-12 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-8 md:mb-12">
-                <h2 class="text-xl md:text-3xl font-bold text-gray-800">Contact Our Team Directly</h2>
-                <p class="text-base md:text-base text-gray-600 mt-1 md:mt-2 max-w-2xl mx-auto">Reach out to specific
-                    departments or team members for specialized inquiries.</p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <!-- Team Member 1 -->
-                <div
-                    class="gsap-card bg-white p-4 md:p-6 rounded-lg shadow-sm md:shadow-md hover:shadow-md md:hover:shadow-lg transition-shadow text-center">
-                    <div
-                        class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full overflow-hidden mb-3 md:mb-4 border-4 border-green-100">
-                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Team Member"
-                            class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-lg md:text-xl font-semibold mb-1 md:mb-1">Sarita Shrestha</h3>
-                    <p class="text-green-600 text-base md:text-lg font-medium mb-1 md:mb-2">Program Director</p>
-                    <p class="text-gray-600 text-sm md:text-base mb-2 md:mb-4">Oversees all sustainability programs and
-                        initiatives</p>
-                    <a href="mailto:sarita@sustainablenepal.org"
-                        class="text-green-600 hover:text-green-700 text-sm md:text-base font-medium">sarita@sustainablenepal.org</a>
-                </div>
-
-                <!-- Team Member 2 -->
-                <div
-                    class="gsap-card bg-white p-4 md:p-6 rounded-lg shadow-sm md:shadow-md hover:shadow-md md:hover:shadow-lg transition-shadow text-center">
-                    <div
-                        class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full overflow-hidden mb-3 md:mb-4 border-4 border-green-100">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member"
-                            class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-lg md:text-xl font-semibold mb-1 md:mb-1">Rajiv Gurung</h3>
-                    <p class="text-green-600 text-base md:text-lg font-medium mb-1 md:mb-2">Volunteer Coordinator</p>
-                    <p class="text-gray-600 text-sm md:text-base mb-2 md:mb-4">Manages volunteer programs and community
-                        engagement</p>
-                    <a href="mailto:rajiv@sustainablenepal.org"
-                        class="text-green-600 hover:text-green-700 text-sm md:text-base font-medium">rajiv@sustainablenepal.org</a>
-                </div>
-
-                <!-- Team Member 3 -->
-                <div
-                    class="gsap-card bg-white p-4 md:p-6 rounded-lg shadow-sm md:shadow-md hover:shadow-md md:hover:shadow-lg transition-shadow text-center">
-                    <div
-                        class="w-20 h-20 md:w-24 md:h-24 mx-auto rounded-full overflow-hidden mb-3 md:mb-4 border-4 border-green-100">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Team Member"
-                            class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="text-lg md:text-xl font-semibold mb-1 md:mb-1">Anjali Thapa</h3>
-                    <p class="text-green-600 text-base md:text-lg font-medium mb-1 md:mb-2">Partnership Manager</p>
-                    <p class="text-gray-600 text-sm md:text-base mb-2 md:mb-4">Handles corporate and organizational
-                        partnerships</p>
-                    <a href="mailto:anjali@sustainablenepal.org"
-                        class="text-green-600 hover:text-green-700 text-sm md:text-base font-medium">anjali@sustainablenepal.org</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Map Section -->
     <section id="map" class="gsap bg-white">

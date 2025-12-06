@@ -104,7 +104,7 @@
         .preload * {
             transition: none !important;
         }
-        
+
         /* Custom styles for notifications */
         .notification {
             position: fixed;
@@ -249,45 +249,35 @@
                                     <a href="/newsletteruploading"
                                         class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">NewsLetter
                                         Uploading</a>
-                                    <a href="/vacancyuploading"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Education
-                                        Resource</a>
-                                    <a href="/vacancyuploading"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Publication
-                                        Archive</a>
+                                    <a href="/jobsuploading"
+                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Jobs
+                                        Uploading
+                                    </a>
+                                    <a href="/noticeuploading"
+                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Notice
+                                        Uploading</a>
                                 </div>
                             </div>
                             <!-- Project Management -->
                             <div class="relative">
-                                <button
+                                <a href="/projectuploading"
                                     class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 sidebar-dropdown">
                                     <div class="flex items-center">
                                         <i
                                             class="fas fa-seedling mr-3 transition-transform duration-200 group-hover:scale-110"></i>
                                         <span>Projects</span>
                                     </div>
-                                    <i
-                                        class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
-                                </button>
-                                <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                                    <a href="#"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Active
-                                        Projects</a>
-                                    <a href="#"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Completed
-                                        Projects</a>
-                                    <a href="#"
-                                        class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md transition-colors duration-150">Upcoming
-                                        Initiatives</a>
-                                </div>
+
+                                </a>
+
                             </div>
 
                             <!-- Sustainability Metrics -->
-                            <a href="#"
+                            <a href="/company"
                                 class="flex items-center px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200">
                                 <i
                                     class="fas fa-chart-line mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                                Sustainability Metrics
+                                Company Details
                             </a>
 
                             <!-- Community Engagement -->
@@ -342,7 +332,7 @@
                         <img class="w-10 h-10 rounded-full transition-transform duration-200 hover:scale-105"
                             src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" alt="User avatar">
                         <div class="ml-3">
-                            <p class="text-sm font-medium text-white">Eco Manager</p>
+                            <p class="text-sm font-medium text-white">{{ $authUser->name }}</p>
                             <p class="text-xs font-medium text-vision-green-300">Admin</p>
                         </div>
                     </div>
@@ -444,45 +434,34 @@
                                 <a href="/newsletteruploading"
                                     class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">NewsLetter
                                     Uploading</a>
-                                <a href="/vacancyuploading"
-                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Education
-                                    Resource</a>
-                                <a href="/vacancyuploading"
-                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Publication
-                                    Archive</a>
+                                <a href="/jobsuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Jobs
+                                    Uploading</a>
+                                <a href="/noticeuploading"
+                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Notice
+                                    Uploading</a>
                             </div>
                         </div>
 
                         <!-- Projects -->
                         <div class="relative">
-                            <button
+                            <a href="/projectuploading"
                                 class="w-full flex items-center justify-between px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200 mobile-sidebar-dropdown">
                                 <div class="flex items-center">
                                     <i
                                         class="fas fa-seedling mr-3 transition-transform duration-200 group-hover:scale-110"></i>
                                     <span>Projects</span>
                                 </div>
-                                <i class="fas fa-chevron-down text-xs transition-transform duration-200 transform"></i>
-                            </button>
-                            <div class="submenu ml-8 pl-2 border-l-2 border-vision-green-600">
-                                <a href="#"
-                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Active
-                                    Projects</a>
-                                <a href="#"
-                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Completed
-                                    Projects</a>
-                                <a href="#"
-                                    class="block px-3 py-2 text-sm text-vision-green-200 hover:bg-vision-green-700 hover:text-white">Upcoming
-                                    Initiatives</a>
-                            </div>
+                            </a>
+
                         </div>
 
                         <!-- Sustainability Metrics -->
-                        <a href="#"
+                        <a href="/company"
                             class="flex items-center px-4 py-2 text-vision-green-200 hover:bg-vision-green-700 hover:text-white rounded-md group transition-all duration-200">
                             <i
                                 class="fas fa-chart-line mr-3 transition-transform duration-200 group-hover:scale-110"></i>
-                            Sustainability Metrics
+                            Company Details
                         </a>
 
                         <!-- Community -->
@@ -535,7 +514,7 @@
                         <img class="w-10 h-10 rounded-full transition-transform duration-200 hover:scale-105"
                             src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" alt="User avatar">
                         <div class="ml-3">
-                            <p class="text-sm font-medium text-white">Eco Manager</p>
+                            <p class="text-sm font-medium text-white">{{ $authUser->name }}</p>
                             <p class="text-xs font-medium text-vision-green-300">Admin</p>
                         </div>
                     </div>
@@ -558,7 +537,7 @@
                     <span class="px-2 hidden md:block lg:block text-vision-green-800">|</span>
                     <h2 class="text-lg font-semibold text-vision-green-800 hidden md:block lg:block">
                         <span class="font-medium text-sm"> Welcome Back,</span> <span
-                            class="font-bold text-vision-green-600 italic">Eco Manager</span>
+                            class="font-bold text-vision-green-600 italic">{{ $authUser->name }}</span>
                     </h2>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -684,8 +663,8 @@
                     <div class="relative">
                         <button type="button" class="flex items-center space-x-2 focus:outline-none"
                             id="user-menu-button">
-                            <span class="text-sm font-medium text-vision-green-700 hidden md:block lg:block">Eco
-                                Manager</span>
+                            <span
+                                class="text-sm font-medium text-vision-green-700 hidden md:block lg:block">{{ $authUser->name }}</span>
                             <img class="w-8 h-8 rounded-full transition-transform duration-200 hover:scale-105"
                                 src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" alt="User avatar">
                         </button>
@@ -697,13 +676,10 @@
                                 Profile</a>
                             <a href="#"
                                 class="block px-4 py-2 text-sm text-vision-green-700 hover:bg-vision-green-50 transition-colors duration-150">Settings</a>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit"
-                                    class="block w-full text-left px-4 py-2 text-sm text-vision-green-700 hover:bg-vision-green-50 transition-colors duration-150">
-                                    Sign out
-                                </button>
-                            </form>
+                            <button id="logoutBtn"
+                                class="block w-full text-left px-4 py-2 text-sm text-vision-green-700 hover:bg-vision-green-50 transition-colors duration-150">
+                                Sign Out
+                            </button>
 
                         </div>
                     </div>
@@ -716,11 +692,59 @@
 
         </div>
 
-        <script>
 
-            // Wait for DOM to be fully loaded
+        <!-- Modal -->
+        <div id="logoutModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-80">
+                <h2 class="text-lg font-bold text-gray-800 mb-4">Confirm Logout</h2>
+                <p class="text-gray-600 mb-6">Are you sure you want to sign out?</p>
+                <div class="flex justify-end gap-3">
+                    <button id="cancelBtn"
+                        class="px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors">
+                        Cancel
+                    </button>
+                    <form id="logoutForm" method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" id="btn"
+                            class="px-4 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+ <script src="js/disable.js"></script>
+     
+        <script>
+            const logoutBtn = document.getElementById('logoutBtn');
+            const logoutModal = document.getElementById('logoutModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const logoutForm = document.getElementById('logoutForm');
+            const confirmLogoutBtn = document.getElementById('btn')
+            
+
+            logoutBtn.addEventListener('click', () => {
+                logoutModal.classList.remove('hidden');
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                logoutModal.classList.add('hidden');
+            });
+
+            // Close modal on clicking outside
+            logoutModal.addEventListener('click', (e) => {
+                if (e.target === logoutModal) {
+                    logoutModal.classList.add('hidden');
+                }
+            });
+
+            logoutForm.addEventListener('submit', () => {
+                confirmLogoutBtn.disabled = true;
+
+                confirmLogoutBtn.textContent = 'Logging out...';
+            });
             document.addEventListener('DOMContentLoaded', function () {
-                // Remove preload class to enable transitions
                 document.body.classList.remove('preload');
 
                 // Initialize UI components
@@ -768,7 +792,7 @@
             });
 
 
-            
+
             function disablebtn() {
                 let btn = document.getElementById('send');
                 btn.disabled = true;

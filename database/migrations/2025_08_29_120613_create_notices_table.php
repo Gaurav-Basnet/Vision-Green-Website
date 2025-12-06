@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('title');
             $table->text('description');
             $table->string('type')->default('Announcement');
+             $table->date('event_date')->nullable(); // new column for event date
             $table->string('location')->nullable();
             $table->string('tags')->nullable();
             $table->timestamps(); // automatically includes created_at and updated_at
